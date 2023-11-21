@@ -1,5 +1,6 @@
 package me.groznyogor;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,11 +15,9 @@ public class groznyogor_alerts extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Rejestrowanie komend
         getCommand("alert").setExecutor(new AlertCommand());
         getCommand("reloadalertplugin").setExecutor(new ReloadCommand());
-
-        // Ładowanie konfiguracji
+        
         loadConfig();
     }
 
@@ -26,7 +25,7 @@ public class groznyogor_alerts extends JavaPlugin {
         getConfig().addDefault("defaultTitle", "&cOGŁOSZENIE");
         getConfig().options().copyDefaults(true);
         saveConfig();
-
+        
         defaultTitle = ChatColor.translateAlternateColorCodes('&', getConfig().getString("defaultTitle"));
     }
 
@@ -49,12 +48,15 @@ public class groznyogor_alerts extends JavaPlugin {
                 player.sendMessage(ChatColor.RED + "Użycie: /alert <wiadomość>");
                 return true;
             }
-
+            
             String message = String.join(" ", args);
-
+            
             String title = defaultTitle;
-
-            player.sendTitle(ChatColor.translateAlternateColorCodes('&', title), ChatColor.translateAlternateColorCodes('&', message), 10, 70, 20);
+            
+            for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                onlinePlayer.sendTitle(ChatColor.translateAlternateColorCodes('&', title),
+                        ChatColor.translateAlternateColorCodes('&', message), 10, 70, 20);
+            }
 
             return true;
         }
