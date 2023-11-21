@@ -1,0 +1,12 @@
+name: groznyogor-alerts
+version: '${project.version}'
+main: me.groznyogor.groznyogor_alerts
+api-version: '1.19'
+authors: [groznyogor]
+description: Plugin writed by groznyogor
+website: http://dc.xomc.pl
+commands:
+  alert:
+    permission: groznyogor.alerts
+  reloadalertplugin:
+    permission: groznyogor.alert.reload
