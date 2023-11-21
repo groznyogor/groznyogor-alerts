@@ -1,4 +1,4 @@
-# groznyogor-pomoc
+# groznyogor-alerts
 ## Plugin na alerty w formie title by groznyogor 🥒
 
 Spigot: spigotlink soon
